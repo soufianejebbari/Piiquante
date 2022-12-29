@@ -6,16 +6,16 @@ const path = require('path');
 // Création d'un routeur express
 const router = express.Router();
 
+
 // On importe les routeurs
 const userRoutes = require('./routes/user');
 const sauceRoutes = require('./routes/sauce');
 
 // On charge les variables d'environnement
 const dotenv = require("dotenv");
-dotenv.config({path: './config/.env'});
+dotenv.config();
 
 // On accède aux variables d'environnement
-const MY_PORT = process.env.PORT;
 const MY_APP_SECRET = process.env.APP_SECRET;
 // On se connecte à la base de données avec mongoose
 mongoose.connect('mongodb+srv://soufianejebbari:Vamossafin77@cluster0.psp5bon.mongodb.net/?retryWrites=true&w=majority',
@@ -28,7 +28,7 @@ mongoose.connect('mongodb+srv://soufianejebbari:Vamossafin77@cluster0.psp5bon.mo
 
 const app = express();
 
-// On ajoute des headers à l'objet response
+// Ajout de headers à l'objet response
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-// On enregistre les routeurs
+// On enregistrer les routeurs
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/auth', userRoutes);
 app.use('/api/sauces', sauceRoutes);
