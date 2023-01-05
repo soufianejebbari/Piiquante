@@ -6,19 +6,17 @@ const path = require('path');
 // Création d'un routeur express
 const router = express.Router();
 
-
 // On importe les routeurs
 const userRoutes = require('./routes/user');
 const sauceRoutes = require('./routes/sauce');
 
 // On charge les variables d'environnement
-const dotenv = require("dotenv");
-dotenv.config();
+require('dotenv').config({ path : './config/.env' });
 
 // On accède aux variables d'environnement
 const MY_APP_SECRET = process.env.APP_SECRET;
 // On se connecte à la base de données avec mongoose
-mongoose.connect('mongodb+srv://soufianejebbari:Vamossafin77@cluster0.psp5bon.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(process.env.MONGO,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
